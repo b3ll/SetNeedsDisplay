@@ -6,9 +6,15 @@ import AppKit
 
 class TestView: NSView {
 
-    @SetNeedsDisplay var testPadding: CGFloat = 0.0
+    @SetNeedsDisplay var testSetNeedsDisplay: CGFloat = 0.0
+
+    @SetNeedsLayout var testSetNeedsLayout: CGFloat = 0.0
+
+    @SetNeedsDisplayAndLayout var testSetNeedsDisplayAndLayout: CGFloat = 0.0
 
     var layoutWasInvalidated: Bool = false
+
+    var displayWasInvalidated: Bool = false
 
     override var needsLayout: Bool {
         didSet {
@@ -16,6 +22,12 @@ class TestView: NSView {
                 self.layoutWasInvalidated = true
             }
         }
+    }
+
+    override func setNeedsDisplay(_ invalidRect: NSRect) {
+        super.setNeedsDisplay(invalidRect)
+
+        self.displayWasInvalidated = true
     }
 
     override func layout() {
@@ -30,14 +42,26 @@ import UIKit
 
 class TestView: UIView {
 
-    @SetNeedsDisplay var testPadding: CGFloat = 0.0
+    @SetNeedsDisplay var testSetNeedsDisplay: CGFloat = 0.0
+
+    @SetNeedsLayout var testSetNeedsLayout: CGFloat = 0.0
+
+    @SetNeedsDisplayAndLayout var testSetNeedsDisplayAndLayout: CGFloat = 0.0
 
     var layoutWasInvalidated: Bool = false
+
+    var displayWasInvalidated: Bool = false
 
     override func setNeedsLayout() {
         super.setNeedsLayout()
 
         self.layoutWasInvalidated = true
+    }
+
+    override func setNeedsDisplay() {
+        super.setNeedsDisplay()
+
+        self.displayWasInvalidated = true
     }
 
     override func layoutSubviews() {
@@ -54,15 +78,32 @@ final class SetNeedsDisplayTests: XCTestCase {
     func testLayoutInvalidation() {
         let view = TestView(frame: .zero)
 
-        #if os(macOS)
-        view.layoutSubtreeIfNeeded()
-        #else
-        view.layoutIfNeeded()
-        #endif
+        view.layoutWasInvalidated = false
 
-        view.testPadding = 50.0
+        view.testSetNeedsLayout = 50.0
 
         XCTAssertTrue(view.layoutWasInvalidated)
+    }
+
+    func testDisplayInvalidation() {
+        let view = TestView(frame: .zero)
+
+        view.displayWasInvalidated = false
+
+        view.testSetNeedsDisplay = 50.0
+
+        XCTAssertTrue(view.displayWasInvalidated)
+    }
+
+    func testDisplayAndLayoutInvalidation() {
+        let view = TestView(frame: .zero)
+
+        view.layoutWasInvalidated = false
+        view.displayWasInvalidated = false
+
+        view.testSetNeedsDisplayAndLayout = 50.0
+
+        XCTAssertTrue(view.displayWasInvalidated && view.layoutWasInvalidated)
     }
 
     static var allTests = [
