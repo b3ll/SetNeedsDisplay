@@ -5,6 +5,11 @@ import PackageDescription
 
 let package = Package(
     name: "SetNeedsDisplay",
+    platforms: [
+        .iOS(.v13),
+        .tvOS(.v13),
+        .macOS(.v10_15),
+    ],
     products: [
         .library(
             name: "SetNeedsDisplay",
@@ -18,5 +23,6 @@ let package = Package(
         .testTarget(
             name: "SetNeedsDisplayTests",
             dependencies: ["SetNeedsDisplay"]),
-    ]
+    ],
+    swiftLanguageVersions: [.v5]
 )

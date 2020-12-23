@@ -23,15 +23,15 @@ Annotate your property of a type that conforms to `Equatable` like so:
 class MyView: UIView {
 
     // Anytime someCustomProperty is changed, `-setNeedsDisplay` will be called.
-    @SetNeedsDisplay var someCustomProperty: CGFloat = 0.0
+    @SetNeeds(.display) var someCustomProperty: CGFloat = 0.0
 
 
     // Anytime someOtherCustomProperty is changed, `-setNeedsLayout` will be called.
-    @SetNeedsLayout var someOtherCustomProperty: CGFloat = 0.0
+    @SetNeeds(.layout) var someOtherCustomProperty: CGFloat = 0.0
 
 
     // Anytime oneLastProperty is changed, `-setNeedsDisplay` and `-setNeedsLayout` will be called.
-    @SetNeedsDisplayAndLayout var oneLastProperty: CGFloat = 0.0
+    @SetNeeds(.display, .layout) var oneLastProperty: CGFloat = 0.0
 
 }
 ```

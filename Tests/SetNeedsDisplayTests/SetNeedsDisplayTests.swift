@@ -6,11 +6,13 @@ import AppKit
 
 class TestView: NSView {
 
-    @SetNeedsDisplay var testSetNeedsDisplay: CGFloat = 0.0
+    @SetNeeds(.display) var testSetNeedsDisplay: CGFloat = 0.0
 
-    @SetNeedsLayout var testSetNeedsLayout: CGFloat = 0.0
+    @SetNeeds(.layout) var testSetNeedsLayout: CGFloat = 0.0
 
-    @SetNeedsDisplayAndLayout var testSetNeedsDisplayAndLayout: CGFloat = 0.0
+    @SetNeeds([.layout, .display]) var testSetNeedsDisplayAndLayout: CGFloat = 0.0
+
+    @SetNeeds(.layout, .display) var testSetNeedsDisplayAndLayout2: CGFloat = 0.0
 
     var layoutWasInvalidated: Bool = false
 
@@ -42,11 +44,13 @@ import UIKit
 
 class TestView: UIView {
 
-    @SetNeedsDisplay var testSetNeedsDisplay: CGFloat = 0.0
+    @SetNeeds(.display) var testSetNeedsDisplay: CGFloat = 0.0
 
-    @SetNeedsLayout var testSetNeedsLayout: CGFloat = 0.0
+    @SetNeeds(.layout) var testSetNeedsLayout: CGFloat = 0.0
 
-    @SetNeedsDisplayAndLayout var testSetNeedsDisplayAndLayout: CGFloat = 0.0
+    @SetNeeds([.layout, .display]) var testSetNeedsDisplayAndLayout: CGFloat = 0.0
+
+    @SetNeeds(.layout, .display) var testSetNeedsDisplayAndLayout2: CGFloat = 0.0
 
     var layoutWasInvalidated: Bool = false
 
@@ -104,9 +108,18 @@ final class SetNeedsDisplayTests: XCTestCase {
         view.testSetNeedsDisplayAndLayout = 50.0
 
         XCTAssertTrue(view.displayWasInvalidated && view.layoutWasInvalidated)
+
+        view.layoutWasInvalidated = false
+        view.displayWasInvalidated = false
+
+        view.testSetNeedsDisplayAndLayout2 = 50.0
+
+        XCTAssertTrue(view.displayWasInvalidated && view.layoutWasInvalidated)
     }
 
     static var allTests = [
         ("testLayoutInvalidation", testLayoutInvalidation),
+        ("testDisplayInvalidation", testDisplayInvalidation),
+        ("testDisplayAndLayoutInvalidation", testDisplayAndLayoutInvalidation),
     ]
 }
