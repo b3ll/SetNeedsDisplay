@@ -2,7 +2,7 @@
 
 ![Tests](https://github.com/b3ll/SetNeedsDisplay/workflows/Tests/badge.svg)
 
-This package provides a property wrapper that can be used on properties for any `NSView` or `UIView` to invalidate the layout whenever the value of said property is changed.
+This package provides property wrappers that can be used on properties for any `NSView` or `UIView` to invalidate the layout or display whenever the value of said property is changed.
 
 **Note**: This code contains some private Swift API stuff that powers `@Published` so there's a strong likelyhood this will break in the future.
 
@@ -22,8 +22,16 @@ Annotate your property of a type that conforms to `Equatable` like so:
 ```swift
 class MyView: UIView {
 
-    // Anytime someCustomProperty is changed, `-setNeedsLayout` will be called.
+    // Anytime someCustomProperty is changed, `-setNeedsDisplay` will be called.
     @SetNeedsDisplay var someCustomProperty: CGFloat = 0.0
+
+
+    // Anytime someOtherCustomProperty is changed, `-setNeedsLayout` will be called.
+    @SetNeedsLayout var someOtherCustomProperty: CGFloat = 0.0
+
+
+    // Anytime oneLastProperty is changed, `-setNeedsDisplay` and `-setNeedsLayout` will be called.
+    @SetNeedsDisplayAndLayout var oneLastProperty: CGFloat = 0.0
 
 }
 ```
