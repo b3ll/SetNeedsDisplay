@@ -1,7 +1,7 @@
 import XCTest
 
-import LayoutInvalidatingTests
+import SetNeedsDisplayTests
 
 var tests = [XCTestCaseEntry]()
-tests += LayoutInvalidatingTests.allTests()
+tests += SetNeedsDisplayTests.allTests()
 XCTMain(tests)

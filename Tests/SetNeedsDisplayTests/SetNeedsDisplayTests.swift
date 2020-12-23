@@ -1,12 +1,12 @@
 import XCTest
-@testable import LayoutInvalidating
+@testable import SetNeedsDisplay
 
 #if os(macOS)
 import AppKit
 
 class TestView: NSView {
 
-    @LayoutInvalidating var testPadding: CGFloat = 0.0
+    @SetNeedsDisplay var testPadding: CGFloat = 0.0
 
     var layoutWasInvalidated: Bool = false
 
@@ -30,7 +30,7 @@ import UIKit
 
 class TestView: UIView {
 
-    @LayoutInvalidating var testPadding: CGFloat = 0.0
+    @SetNeedsDisplay var testPadding: CGFloat = 0.0
 
     var layoutWasInvalidated: Bool = false
 
@@ -49,7 +49,7 @@ class TestView: UIView {
 }
 #endif
 
-final class LayoutInvalidatingTests: XCTestCase {
+final class SetNeedsDisplayTests: XCTestCase {
 
     func testLayoutInvalidation() {
         let view = TestView(frame: .zero)

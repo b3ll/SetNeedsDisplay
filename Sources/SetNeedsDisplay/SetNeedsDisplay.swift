@@ -8,7 +8,7 @@ import UIKit
 
 /// A property wrapper for `UIView` or `NSView` (depending on platform) that will invalidate the layout of the view when the property's value is changed to something new.
 @propertyWrapper
-public final class LayoutInvalidating<Value> where Value: Equatable {
+public final class SetNeedsDisplay<Value> where Value: Equatable {
 
     #if os(macOS)
     public typealias ViewType = NSView
@@ -19,7 +19,7 @@ public final class LayoutInvalidating<Value> where Value: Equatable {
     public static subscript<EnclosingSelf>(
       _enclosingInstance observed: EnclosingSelf,
       wrapped wrappedKeyPath: ReferenceWritableKeyPath<EnclosingSelf, Value>,
-      storage storageKeyPath: ReferenceWritableKeyPath<EnclosingSelf, LayoutInvalidating>
+      storage storageKeyPath: ReferenceWritableKeyPath<EnclosingSelf, SetNeedsDisplay>
     ) -> Value where EnclosingSelf: ViewType {
       get {
         return observed[keyPath: storageKeyPath].stored

@@ -4,19 +4,19 @@
 import PackageDescription
 
 let package = Package(
-    name: "LayoutInvalidating",
+    name: "SetNeedsDisplay",
     products: [
         .library(
-            name: "LayoutInvalidating",
-            targets: ["LayoutInvalidating"]),
+            name: "SetNeedsDisplay",
+            targets: ["SetNeedsDisplay"]),
     ],
     dependencies: [],
     targets: [
         .target(
-            name: "LayoutInvalidating",
+            name: "SetNeedsDisplay",
             dependencies: []),
         .testTarget(
-            name: "LayoutInvalidatingTests",
-            dependencies: ["LayoutInvalidating"]),
+            name: "SetNeedsDisplayTests",
+            dependencies: ["SetNeedsDisplay"]),
     ]
 )
