@@ -4,7 +4,7 @@
 
 This package provides property wrappers that can be used on properties for any `NSView` or `UIView` to invalidate the layout or display whenever the value of said property is changed.
 
-**Note**: This code contains some private Swift API stuff that powers `@Published` so there's a strong likelyhood this will break in the future.
+**Note**: This code contains some private Swift API stuff that powers `@Published` so there's a strong liklihood this will break in the future.
 
 - [Introduction](#SetNeedsDisplay)
 - [Usage](#usage)
