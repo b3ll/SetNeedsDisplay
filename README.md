@@ -1,3 +1,7 @@
+> [!IMPORTANT]
+> This now exists in UIKit for iOS 15 and above (neat!). Feel free to use this for earlier versions if needed, but no further updates will be made here :)
+> https://developer.apple.com/documentation/uikit/uiview/invalidating
+
 # SetNeedsDisplay
 
 ![Tests](https://github.com/b3ll/SetNeedsDisplay/workflows/Tests/badge.svg)
